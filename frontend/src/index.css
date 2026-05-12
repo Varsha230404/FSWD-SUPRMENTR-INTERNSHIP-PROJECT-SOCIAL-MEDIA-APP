@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --color-primary: #2563EB;
+  --color-primary-light: #3B82F6;
+  --color-primary-dark: #1D4ED8;
+  --color-primary-50: #EFF6FF;
+  --color-primary-100: #DBEAFE;
+  --color-accent: #2563EB;
+  --color-surface: #ffffff;
+  --color-surface-light: #FAFBFC;
+  --color-surface-lighter: #F8FAFC;
+  --color-border: #E2E8F0;
+  --color-text: #191B23;
+  --color-text-muted: #64748B;
+  --color-danger: #EF4444;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+}
+
+:root {
+  /* Single source of truth for navbar height + content offset */
+  --nav-h: 64px;
+  --nav-gap: 32px;
+  --content-top: calc(var(--nav-h) + var(--nav-gap)); /* 96px */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-sans);
+  background-color: #F8FAFC;
+  color: var(--color-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Card — clean professional white card with subtle ambient shadow */
+.glass {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  box-shadow:
+    0px 1px 3px rgba(0, 0, 0, 0.04),
+    0px 6px 16px -4px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fadeIn { animation: fadeIn 0.3s ease-out; }
+
+/* Auth page animations */
+@keyframes authSlideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes authSlideInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes blobFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.08); }
+  66% { transform: translate(-25px, 25px) scale(0.95); }
+}
+@keyframes blobFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40px, 30px) scale(1.1); }
+}
+@keyframes blobFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -40px) scale(0.92); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-auth-up { animation: authSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-auth-right { animation: authSlideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-blob-1 { animation: blobFloat1 18s ease-in-out infinite; }
+.animate-blob-2 { animation: blobFloat2 22s ease-in-out infinite; }
+.animate-blob-3 { animation: blobFloat3 20s ease-in-out infinite; }
+.animate-spin-slow { animation: spinSlow 20s linear infinite; }
+.auth-gradient-anim {
+  background: linear-gradient(135deg, #2563EB, #1D4ED8, #3B82F6, #2563EB);
+  background-size: 300% 300%;
+  animation: gradientShift 12s ease infinite;
+}
+.auth-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Auth-specific scoped utilities */
+.auth-card {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid #E2E8F0;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 10px 30px -10px rgba(0, 0, 0, 0.08),
+    0 30px 60px -30px rgba(0, 0, 0, 0.10);
+}
+.auth-input-wrap {
+  position: relative;
+  transition: all 0.2s ease;
+}
+.auth-input-wrap:focus-within {
+  transform: translateY(-1px);
+}
