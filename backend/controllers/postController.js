@@ -3,7 +3,7 @@ const Post = require('../models/Post');
 exports.createPost = async (req, res, next) => {
   try {
     const postData = { user: req.user._id, text: req.body.text };
-    if (req.file) postData.image = `/uploads/${req.file.filename}`;
+    if (req.file) postData.image = req.file.path;
 
     const post = await Post.create(postData);
     await post.populate('user', 'name avatar username');
@@ -60,7 +60,7 @@ exports.updatePost = async (req, res, next) => {
     }
 
     if (req.body.text) post.text = req.body.text;
-    if (req.file) post.image = `/uploads/${req.file.filename}`;
+    if (req.file) post.image = req.file.path;
     await post.save();
     await post.populate('user', 'name avatar username');
     res.json(post);

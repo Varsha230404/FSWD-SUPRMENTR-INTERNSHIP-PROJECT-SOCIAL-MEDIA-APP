@@ -29,7 +29,7 @@ exports.updateProfile = async (req, res, next) => {
     const updates = {};
     if (req.body.name) updates.name = req.body.name;
     if (req.body.bio !== undefined) updates.bio = req.body.bio;
-    if (req.file) updates.avatar = `/uploads/${req.file.filename}`;
+    if (req.file) updates.avatar = req.file.path;
 
     const user = await User.findByIdAndUpdate(req.user._id, updates, { new: true, runValidators: true });
     res.json(user);
